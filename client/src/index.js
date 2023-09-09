@@ -20,11 +20,11 @@ const wagmiConfig = createConfig({
 const ethereumClient = new EthereumClient(wagmiConfig, chains)
 
 ReactDOM.render(
-    <AuthProvider>
-        <WagmiConfig config={wagmiConfig}>
+    <WagmiConfig config={wagmiConfig}>
+        <AuthProvider>
             <App />
-        </WagmiConfig>
-        <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
-    </AuthProvider>,
+            <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />
+        </AuthProvider>
+    </WagmiConfig>,
     document.getElementById('root'));
 

@@ -7,12 +7,6 @@ export default function Home() {
   const { open, close } = useWeb3Modal()
   const { address, isConnecting, isDisconnected } = useAccount()
 
-  useEffect(() => {
-    if (address) {
-      console.log(address);
-    }
-  }, [address]);
-
   return (
     <div onClick={() => open()}>
       connect
