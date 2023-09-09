@@ -6,8 +6,8 @@ import { Router, Route, Switch } from 'react-router-dom';
 
 // Pages
 import NoMatchPage from "./pages/noMatchPage";
-import Home from "./pages/Home/home";
-import Account from "./pages/Account/account";
+import Home from "./pages/Home/Home";
+import Account from "./pages/Account/Account";
 
 function App() {
   return (
