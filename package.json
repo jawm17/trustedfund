@@ -30,6 +30,10 @@
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
+    "react-slick": "^0.29.0",
+    "semantic-ui-css": "^2.5.0",
+    "semantic-ui-react": "^2.1.4",
+    "slick-carousel": "^1.8.1",
     "web3": "^1.7.3"
   },
   "engines": {
