@@ -4,6 +4,7 @@ import { useContractWrite, useContractRead, useFeeData, usePrepareContractWrite,
 import UploadHandler from "../../components/UploadHandler";
 import { RegistryAddress, RegistryAbi, AlloAddress, AlloAbi, sepolia_RPC, managerAddress } from "../../contracts";
 import Web3 from "web3";
+import Header from "../../components/Header";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import "./createStyle.css";
@@ -171,10 +172,11 @@ export default function Create() {
     async function createProject() {
         try {
             const projectData = {
-                title: "test",
-                description: "description",
+                title: title,
+                description: description,
                 duration: 1,
-                goal: 2,
+                goal: fundingGoal,
+                media: image,
                 creatorAddress: address.toLowerCase(),
                 alloPoolId: AlloPoolId,
                 alloProfileId: AlloProfileId
@@ -188,6 +190,8 @@ export default function Create() {
     }
 
     return (
+        <div>
+            <Header/>
         <div id="createPageOuter">
             <div id="createPage">
                 <div id="createTitle">
@@ -207,10 +211,13 @@ export default function Create() {
                 </div>
                 <UploadHandler setImage={(url) => setImage(url)} />
                 <div className="inputTitle">
-                    funding goal
+                    funding goal (USD)
                 </div>
                 <div class="ui input createInput" >
                     <input type="text" placeholder="funding goal" value={fundingGoal} onChange={(e) => setFundingGoal(e.target.value)} />
+                </div>
+                <div className="inputTitle">
+                    *pools are funded using the goerli USDC token: 0x7af963cf6d228e564e2a0aa0ddbf06210b38615d
                 </div>
                 {!AlloProfileId && !AlloPoolId ?
                     <div className="contractBtnFlex" onClick={() => registerWithAllo()}>
@@ -240,6 +247,7 @@ export default function Create() {
                     null
                 }
             </div>
+        </div>
         </div>
     );
 }

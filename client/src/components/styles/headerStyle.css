@@ -1,0 +1,59 @@
+#header {
+    position: fixed;
+    top: 0px;
+    width: 100vw;
+    height: 90px;
+    background-color: white;
+    box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+#logoName {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin-left: 20px;
+    cursor: pointer;
+}
+
+#logo {
+    height: 35px;
+}
+
+#headerTitle {
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+#btnRight {
+    position: absolute;
+    right: 20px;
+    top: 0px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+#connectBtn {
+    width: 120px;
+    height: 40px;
+    background-color: #0b83ff;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+#createBtn {
+    width: 120px;
+    height: 40px;
+    background-color: #0b83ff;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-size: 15px;
+}
