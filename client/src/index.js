@@ -27,4 +27,3 @@ ReactDOM.render(
         </AuthProvider>
     </WagmiConfig>,
     document.getElementById('root'));
-

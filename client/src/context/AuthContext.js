@@ -1,8 +1,5 @@
 import React, { createContext, useState, useEffect } from 'react';
 import axios from "axios";
-import { useWeb3Modal } from '@web3modal/react';
-import { useAccount } from 'wagmi';
-import AuthService from '../services/AuthService';
 
 export const AuthContext = createContext();
 
@@ -10,34 +7,34 @@ export default ({ children }) => {
     const [user, setUser] = useState(null);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
-    const { address, isConnecting, isDisconnected } = useAccount();
 
-    async function getUserData(address) {
+    useEffect(() => {
+        getUser();
+    }, []);
+
+    async function getUser() {
         try {
-            const { data } = await axios.post("/user/get-user-data", { address: address });
-            console.log(data);
-            if (data.user) {
-                setUser(data.user);
+            const res = await axios.get("/user/account-info");
+            if (res.status === 200) {
+                console.log(res.data)
+                setUser(res.data.user);
                 setIsAuthenticated(true);
+                setIsLoaded(true);
             } else {
-                setUser(null)
+                setUser(null);
+                setIsAuthenticated(false);
+                setIsLoaded(true);
             }
-            setIsLoaded(true);
         } catch (error) {
-            console.log(error);
+            setUser(null);
+            setIsAuthenticated(false);
+            setIsLoaded(true);
         }
     }
 
-    useEffect(() => {
-        if (address) {
-            console.log(address);
-            getUserData(address);
-        }
-    }, [address]);
-
     return (
         <div>
-            {!isLoaded ? <div> </div> :
+            {!isLoaded ? <h1> </h1> :
                 <AuthContext.Provider value={{ user, setUser, isAuthenticated, setIsAuthenticated }}>
                     {children}
                 </AuthContext.Provider>}

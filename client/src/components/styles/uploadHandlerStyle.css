@@ -1,0 +1,62 @@
+.uploadComponent {
+    width: 400px;
+    height: 200px;
+    background-color: gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    position: relative;
+}
+
+.sampleImg {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+    position: absolute;
+}
+
+#removeImgBtn {
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    color: red;
+}
+
+.uploadText {
+
+}
+
+.uploadingFileMsg {
+    margin-top: 15px;
+}
+
+.loaderFlex {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.loader {
+    margin-bottom: 0px;
+    border: 3px solid var(--grayMain);
+    border-top: 3px solid white;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
