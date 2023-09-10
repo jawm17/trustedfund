@@ -5,12 +5,12 @@ import { useWeb3Modal } from '@web3modal/react';
 import { useAccount } from 'wagmi';
 import "./styles/headerStyle.css";
 
-export default function Header() {
+export default function Header(props) {
     const history = useHistory();
     const { open, close } = useWeb3Modal()
     const { address, isConnecting, isDisconnected } = useAccount()
     return (
-        <div id="header">
+        <div id="header" >
             <div id="logoName" onClick={() => history.push("/")}>
                 <img id="logo" src={logo}></img>
                 <div id="headerTitle">trusted fund</div>
