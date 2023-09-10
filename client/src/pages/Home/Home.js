@@ -19,6 +19,21 @@ import SliderWithCards from "./Slider";
 
 export default function Home() {
   const [visible, setVisible] = useState(false);
+  const [projects, setProjects] = useState([]);
+
+    useEffect(() => {
+      getProjects();
+    }, []);
+
+    async function getProjects() {
+      try {
+        const data = await axios.get("/project/all-projects");
+        console.log(data);
+        setProjects(data.data.projects);
+      } catch (error) {
+        
+      }
+    }
 
   return (
     <>
