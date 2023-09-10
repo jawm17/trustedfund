@@ -1,36 +1,39 @@
 /* nav */
-.nav{
+#nav{
     /* come back */
-    padding-top: 70px;
-    height: 100vh;
-    overflow-y: hidden;
+    /* padding-top: 70px; */
+    /* height: 100vh; */
+   display: flex;
+   align-items: center;
+   justify-content: center;
 }
-.pushable {
-    /* height: 100vh !important; */
+#navCon{
+    background-color: rgba(255, 255, 255, 0);
+    margin: auto;
+    padding-top: 50px;
+    padding-left: 100px;
+    padding-right: 100px;
+    box-shadow: none;
+    border: none;
+    color: white;
+    display: flex;
+    align-items: center;
 }
-.ui.menu.fixed {
-    /* height: 60px; */
+#navCon h2{
+    color: white;
+    display: flex;
+    align-items: center;
+    width: 90%;
 }
-.ui.menu.fixed {
-    /* height: 60px; */
+#burger{
+ width: 10%;
 }
-.slider-container  .ui.button {
-    border-radius: 100%;
-    height: 70px;
-    width: 70px;
-    background: white;  /* fallback for old browsers */
-    color: black;
-        
-}
-.slider-container  .ui.button:hover {
-    background: rgba(255, 255, 255, 0);  
-    /* fallback for old browsers */
-    backdrop-filter: blur(5px);
-}
-.slider-container {
-    position: relative;
 
+
+.ui.segment:last-child {
+    margin: 0;
 }
+
 /* home padding */
 .ui.basic.segment {
     padding: 0;
@@ -39,27 +42,101 @@
 #homePage{
     background: transparent no-repeat;
     
-
+    
 }
 /* hero */
 #heroSection{
-    height: 55vh;
+    height: 100vh;
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 0;
+    background: url(https://www.fundamental.bg/img/artboard.avif) no-repeat no-repeat;
+    background-size: cover;
+    color: white;
+    
 }
-#sliderc{
-    height: 200px;
+#heroSection h1{
+    /* height: 100vh; */
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 65%;
+    font-size: 72px;
+    margin-bottom: 0px !important ;
+}
+#heroSection h3{
+    margin: auto;
+    width: 95%;
+    
+    padding-top: 15px;
+    font-size: 25px;
+    margin-bottom: 0px !important ;
+    
+}
+/* slider */
+#sliderContainerHome{
     position: relative;
-    padding-left: 35px;
-    padding-right: 35px;
-    padding-bottom: 20px;
-    margin-bottom: 20px;
+    margin: auto;
+    padding-top: 100px;
+    padding-bottom: 100px;
 }
-html{
+#sliderTile{
+    font-size: 40px;
+    padding-left: 50px;
+    padding-bottom: 50px;
+    text-decoration: underline;
 }
-body::-webkit-scrollbar {
-    display: none;
-  }
+#slider {
+    width: 100%;
+    position: relative;    
+}
+#slideItem{
+    height: 200px;
+    width: 300px;
+    background-image: url(https://www.fundamental.bg/img/artboard.avif);
+    background-size: cover;
+}
+#cardInfoSlider h1, #cardInfoSlider p{
+    color: white;
+}
+/* span */
+#helpers1{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100px;
+    height: 100%;
+    background: white;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, white, white);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255)75%); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    z-index: 101;
+}
+#helpers2{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100px;
+    height: 70%;
+    background: white;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, white, white);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, white, rgba(255, 255, 255, 0)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        z-index: 101;
+
+}
+/* btn */
+#slider .ui.button {
+    border-radius: 10px;
+    height: 50px;
+    width: 50px;
+    background: rgba(0, 0, 0, 0);  
+    color: black;
+    backdrop-filter: blur(15px);
+
+}
+#slider .ui.button:hover {
+    background: rgba(158, 158, 158, 0.372);  
+    backdrop-filter: blur(15px);
+}

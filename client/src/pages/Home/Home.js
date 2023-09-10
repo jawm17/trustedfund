@@ -26,21 +26,16 @@ export default function Home() {
 
   return (
     <>
-      <nav className="nav" >
-        <Menu fixed='top' style={{ paddingTop: "20px", paddingBottom: "20px" }} >
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", width: "95%", paddingLeft: "10px", paddingRight: "10px" }}>
+      <nav id="nav" >
+        <Menu fixed='top'  id="navCon" >
             <Header as='h2'>
-              <Icon name='money bill alternate outline' />
-              <Header.Content href="/" as='a' style={{color: "black"}}>Fund Trust</Header.Content>
+              <Icon name='money bill alternate outline' inverted />
+              <Header.Content href="/" as='a' style={{ color: "white" }}>Fund Trust</Header.Content>
             </Header>
-            <Button size="mini"><Icon name="upload"/>Create</Button>
-          </div>
-
-          <Menu.Menu position='right' style={{ marginLeft: "20px !important", paddingLeft: "20px !important" }} >
-            <Menu.Item style={{ display: "flex", alignItems: "center", justifyContent: "end" }} onClick={() => setVisible(!visible)}>
-              {/* <Icon name='logo circle' size='large' /> */}
-              <Icon name='list layout circle' size='large' />
-
+            <Button size="mini"><Icon name="upload" />Create</Button>
+          <Menu.Menu  position='right'  >
+            <Menu.Item id="burger"  onClick={() => setVisible(!visible)}>
+              <Icon inverted name='list layout circle' size='large' />
             </Menu.Item>
           </Menu.Menu>
         </Menu>
@@ -54,11 +49,11 @@ export default function Home() {
             vertical
             visible={visible}
           >
-            <Menu.Item as='a' href="/projects" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height:"60px"}}>
+            <Menu.Item as='a' href="/projects" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: "60px" }}>
               Projects
               <Icon name='barcode' />
             </Menu.Item>
-            <Menu.Item as='a' href="/" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height:"60px"}}>
+            <Menu.Item as='a' href="/" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: "60px" }}>
               Profile
               <Icon name='chevron down' />
             </Menu.Item>
@@ -67,14 +62,14 @@ export default function Home() {
             {/* home */}
             <section id="homePage">
               <div id="heroSection">
-                <h1 style={{padding: 0, margin: 0, textAlign: "center"}}>
-                Fund Trust
+                <h1 style={{}}>
+                Vote, Validate, and Venture Forward.
+                <h3>
+
+                Empower & Fund: Where the community validates, votes, and ensures every dollar is rightfully spent.           </h3>
                 </h1>
-                <h3 style={{padding: 0, margin: 0, textAlign: "center"}}>
-                  Trust That Shit!
-                </h3>
               </div>
-              <div>
+              <div id="sliderContainerHome">
                 <SliderWithCards />
               </div>
             </section>
