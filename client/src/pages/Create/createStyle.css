@@ -1,0 +1,24 @@
+#createPageOuter {
+    width: 100vw;
+    height: 100%;
+    position: fixed;
+    bottom: 0px;
+    display: flex;
+    justify-content: center;
+}
+
+#createPage {
+    max-width: 95vw;
+    width: 600px;
+}
+
+.contractBtn {
+    width: 100%;
+    height: 80px;
+    background-color: red;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}

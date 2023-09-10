@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAccount } from 'wagmi';
 import { useContractWrite, useContractRead, useFeeData, usePrepareContractWrite, useSwitchNetwork, useNetwork } from 'wagmi';
-import { RegistryAddress, RegistryAbi, AlloAddress, AlloAbi, sepolia_RPC, managerAddress } from "../../contracts";
+import { RegistryAddress, RegistryAbi, AlloAddress, AlloAddressMain, AlloAbi, sepolia_RPC, managerAddress } from "../../contracts";
 import Web3 from "web3";
 import axios from "axios";
 import "./projectPageStyle.css";
@@ -32,7 +32,7 @@ export default function ProjectPage(props) {
         isSuccess: isSuccess3,
         write: fundPoolWrite
     } = useContractWrite({
-        address: AlloAddress,
+        address: AlloAddressMain,
         abi: AlloAbi,
         functionName: 'fundPool',
         onError(error) {

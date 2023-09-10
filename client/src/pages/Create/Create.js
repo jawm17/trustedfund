@@ -12,8 +12,9 @@ export default function Create() {
     const { address, isConnecting, isDisconnected } = useAccount();
     const [AlloProfileId, setAlloProfileId] = useState("");
     const [AlloPoolId, setAlloPoolId] = useState("");
+    const [loadingProfileId, setLoadingProfileId] = useState(false);
 
-      // ALLO PROFILE CREATION ========================================================
+    // ALLO PROFILE CREATION ========================================================
     const {
         data: createProfileData,
         isLoading: isLoading1,
@@ -25,6 +26,7 @@ export default function Create() {
         functionName: 'createProfile',
         onError(error) {
             console.log('Error', error.toString())
+            setLoadingProfileId(false);
             // console.log(error.toString().slice(0,22))
             if (error.toString().slice(0, 22) === "ConnectorNotFoundError") {
                 alert("please recconnect your wallet and try again.")
@@ -37,6 +39,12 @@ export default function Create() {
             getProfileId(data.hash);
         }
     });
+
+    useEffect(() => {
+        if (isLoading1) {
+            setLoadingProfileId(true);
+        }
+    }, [isLoading1]);
 
     async function registerWithAllo() {
         if (createProfileWrite && address) {
@@ -113,7 +121,7 @@ export default function Create() {
                     "0x07e3f86307e7ffe350bc441cbb3fc87c00291802c4969caf7163b84758733592", //profileId
                     "0xf243619f931c81617EE00bAAA5c5d97aCcC5af10", //strategy
                     "0x000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000", //init strategy data
-                    "0x07865c6E87B9F70255377e024ace6630C1Eaa37F", //token address
+                    "0x7af963cf6d228e564e2a0aa0ddbf06210b38615d", //token address
                     0,
                     blankMetadata,
                     [address]
@@ -209,36 +217,48 @@ export default function Create() {
     }
 
     return (
-        <div>
-            create
-            <div>
-                title
-            </div>
-            <input></input>
-            <div>
-                description
-            </div>
-            <UploadHandler />
-            <input></input>
-            <div>
-                funding goal
-            </div>
-            <input></input>
-            <div onClick={() => registerWithAllo()}>
-                create Profile
-            </div>
-            {AlloProfileId ?
-                <div onClick={() => createPool()}>
-                    create Pool
-                </div> :
-                null
-            }
-            {AlloProfileId && AlloPoolId ?
-                <div onClick={() => createProject()}>
-                    create
+        <div id="createPageOuter">
+            <div id="createPage">
+                create
+                <div>
+                    title
                 </div>
-                : null
-            }
+                <input></input>
+                <div>
+                    description
+                </div>
+                <UploadHandler />
+                <input></input>
+                <div>
+                    funding goal
+                </div>
+                <input></input>
+                {!AlloProfileId && !AlloPoolId ?
+                    <div className="contractBtn" onClick={() => registerWithAllo()}>
+                        create profile
+                    </div> :
+                    null}
+                {AlloProfileId ?
+                    <div>
+                        <div onClick={() => createPool()}>
+                            create Pool
+                        </div>
+                        {loadingProfileId ?
+                            <div className="loader">
+                            </div>
+                            : null
+                        }
+                    </div>
+                    :
+                    null
+                }
+                {AlloProfileId && AlloPoolId ?
+                    <div onClick={() => createProject()}>
+                        create
+                    </div>
+                    : null
+                }
+            </div>
         </div>
     );
 }
