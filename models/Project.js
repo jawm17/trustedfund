@@ -10,7 +10,8 @@ const ProjectSchema = new mongoose.Schema({
         required: true
     },
     media: {
-        type: Array,
+        type: String,
+        required: true
     },
     duration: {
         type: Number,

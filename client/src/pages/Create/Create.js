@@ -4,16 +4,26 @@ import { useContractWrite, useContractRead, useFeeData, usePrepareContractWrite,
 import UploadHandler from "../../components/UploadHandler";
 import { RegistryAddress, RegistryAbi, AlloAddress, AlloAbi, sepolia_RPC, managerAddress } from "../../contracts";
 import Web3 from "web3";
+import Header from "../../components/Header";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 import "./createStyle.css";
 
+
 export default function Create() {
     var web3 = new Web3(sepolia_RPC);
+    const history = useHistory();
     const { address, isConnecting, isDisconnected } = useAccount();
     const [AlloProfileId, setAlloProfileId] = useState("");
     const [AlloPoolId, setAlloPoolId] = useState("");
+    const [loadingProfileId, setLoadingProfileId] = useState(false);
+    const [loadingPoolId, setLoadingPoolId] = useState(false);
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
+    const [fundingGoal, setFundingGoal] = useState(0);
+    const [image, setImage] = useState("");
 
-      // ALLO PROFILE CREATION ========================================================
+    // ALLO PROFILE CREATION ========================================================
     const {
         data: createProfileData,
         isLoading: isLoading1,
@@ -25,6 +35,7 @@ export default function Create() {
         functionName: 'createProfile',
         onError(error) {
             console.log('Error', error.toString())
+            setLoadingProfileId(false);
             // console.log(error.toString().slice(0,22))
             if (error.toString().slice(0, 22) === "ConnectorNotFoundError") {
                 alert("please recconnect your wallet and try again.")
@@ -39,24 +50,33 @@ export default function Create() {
     });
 
     async function registerWithAllo() {
-        if (createProfileWrite && address) {
-            const nonce = Math.floor(Date.now() / 1000);
-            const blankMetadata = {
-                protocol: 0,
-                pointer: ""
-            };
-            createProfileWrite({
-                args: [
-                    nonce,
-                    "testUser",
-                    blankMetadata,
-                    address,
-                    [address]
-                ],
-                from: address,
-            })
+        if (title && description && image) {
+            setLoadingProfileId(true);
+            if (createProfileWrite && address) {
+                const nonce = Math.floor(Date.now() / 1000);
+                const blankMetadata = {
+                    protocol: 0,
+                    pointer: ""
+                };
+                createProfileWrite({
+                    args: [
+                        nonce,
+                        "testUser",
+                        blankMetadata,
+                        address,
+                        [address]
+                    ],
+                    from: address,
+                })
+            } else {
+                return
+            }
         } else {
-            return
+            console.log(title)
+            console.log(description)
+            console.log(fundingGoal);
+            console.log(image)
+            alert("please fill out all fields");
         }
     }
 
@@ -103,6 +123,7 @@ export default function Create() {
     });
 
     async function createPool() {
+        setLoadingPoolId(true);
         if (createPoolWrite) {
             const blankMetadata = {
                 protocol: 0,
@@ -110,10 +131,10 @@ export default function Create() {
             };
             createPoolWrite({
                 args: [
-                    "0x07e3f86307e7ffe350bc441cbb3fc87c00291802c4969caf7163b84758733592", //profileId
+                    AlloProfileId, //profileId
                     "0xf243619f931c81617EE00bAAA5c5d97aCcC5af10", //strategy
                     "0x000000000000000000000000000000000000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000000", //init strategy data
-                    "0x07865c6E87B9F70255377e024ace6630C1Eaa37F", //token address
+                    "0x7af963cf6d228e564e2a0aa0ddbf06210b38615d", //token address
                     0,
                     blankMetadata,
                     [address]
@@ -142,103 +163,91 @@ export default function Create() {
         }
     }
 
-    // 0x000000000000000000000000000000000000000000000000000000000000001c
-
-    const {
-        data: allocateData,
-        isLoading: isLoading3,
-        isSuccess: isSuccess3,
-        write: allocateWrite
-    } = useContractWrite({
-        address: AlloAddress,
-        abi: AlloAbi,
-        functionName: 'fundPool',
-        onError(error) {
-            console.log('Error', error.toString())
-            // console.log(error.toString().slice(0,22))
-            if (error.toString().slice(0, 22) === "ConnectorNotFoundError") {
-                alert("please recconnect your wallet and try again.")
-            } else if (error.toString().slice(0, 30) === "ContractFunctionExecutionError") {
-                alert("you don't have enough money lol");
-            }
-        },
-        onSuccess(data) {
-            console.log(data);
-        }
-    });
-
-    async function allocateFunds() {
-        if (allocateWrite) {
-            const blankMetadata = {
-                protocol: 0,
-                pointer: ""
-            };
-            allocateWrite({
-                args: [
-                    "0x000000000000000000000000000000000000000000000000000000000000001c", //profileId
-                    "1000000000", //strategy
-                ],
-                from: address,
-            })
-        } else {
-            return
-        }
-    }
-
     useEffect(() => {
         if (AlloPoolId && AlloProfileId) {
-            console.log("we got it!")
+            createProject();
         }
     }, [AlloPoolId, AlloProfileId]);
 
     async function createProject() {
         try {
             const projectData = {
-                title: "test",
-                description: "description",
+                title: title,
+                description: description,
                 duration: 1,
-                goal: 2,
+                goal: fundingGoal,
+                media: image,
                 creatorAddress: address.toLowerCase(),
                 alloPoolId: AlloPoolId,
                 alloProfileId: AlloProfileId
             }
-            const data = await axios.post("/project/new-project", { projectData })
+            const data = await axios.post("/project/new-project", { projectData });
+            console.log(data)
+            history.push("/project/" + data.data.project._id);
         } catch (error) {
-
+            alert("something went wrong");
         }
     }
 
     return (
         <div>
-            create
-            <div>
-                title
-            </div>
-            <input></input>
-            <div>
-                description
-            </div>
-            <UploadHandler />
-            <input></input>
-            <div>
-                funding goal
-            </div>
-            <input></input>
-            <div onClick={() => registerWithAllo()}>
-                create Profile
-            </div>
-            {AlloProfileId ?
-                <div onClick={() => createPool()}>
-                    create Pool
-                </div> :
-                null
-            }
-            {AlloProfileId && AlloPoolId ?
-                <div onClick={() => createProject()}>
-                    create
+            <Header/>
+        <div id="createPageOuter">
+            <div id="createPage">
+                <div id="createTitle">
+                    create a fundraiser
                 </div>
-                : null
-            }
+                <div className="inputTitle">
+                    title
+                </div>
+                <div class="ui input createInput" >
+                    <input type="text" placeholder="title" value={title} onChange={(e) => setTitle(e.target.value)} />
+                </div>
+                <div className="inputTitle">
+                    description
+                </div>
+                <div class="ui input createInput" >
+                    <input type="text" placeholder="description" value={description} onChange={(e) => setDescription(e.target.value)} />
+                </div>
+                <UploadHandler setImage={(url) => setImage(url)} />
+                <div className="inputTitle">
+                    funding goal (USD)
+                </div>
+                <div class="ui input createInput" >
+                    <input type="text" placeholder="funding goal" value={fundingGoal} onChange={(e) => setFundingGoal(e.target.value)} />
+                </div>
+                <div className="inputTitle">
+                    *pools are funded using the goerli USDC token: 0x7af963cf6d228e564e2a0aa0ddbf06210b38615d
+                </div>
+                {!AlloProfileId && !AlloPoolId ?
+                    <div className="contractBtnFlex" onClick={() => registerWithAllo()}>
+                        <div className="contractBtn">
+                            create allo profile
+                        </div>
+                        {loadingProfileId ?
+                            <div className="blackLoader">
+                            </div>
+                            : null
+                        }
+                    </div>
+                    :
+                    null}
+                {AlloProfileId ?
+                    <div className="contractBtnFlex" onClick={() => createPool()}>
+                        <div className="contractBtn">
+                            create pool
+                        </div>
+                        {loadingPoolId ?
+                            <div className="blackLoader">
+                            </div>
+                            : null
+                        }
+                    </div>
+                    :
+                    null
+                }
+            </div>
+        </div>
         </div>
     );
 }

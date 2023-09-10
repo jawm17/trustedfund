@@ -1,5 +1,5 @@
 .uploadComponent {
-    width: 400px;
+    width: 100%;
     height: 200px;
     background-color: gray;
     display: flex;
@@ -7,6 +7,8 @@
     align-items: center;
     border-radius: 8px;
     position: relative;
+    margin-top: 20px;
+    cursor: pointer;
 }
 
 .sampleImg {
