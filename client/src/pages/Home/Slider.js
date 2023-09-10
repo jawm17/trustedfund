@@ -30,7 +30,7 @@ const NextArrow = (props) => {
   }
 
 
-const SliderWithCards = () => {
+const SliderWithCards = (props) => {
     const settings = {
         dots: true,
         infinite: false,
@@ -72,12 +72,12 @@ const SliderWithCards = () => {
       ]
     };
   
-    const cards = Array(15).fill().map((_, index) => (
+    const cards = props?.projects.map((project, index) => (
       <div key={index} >
-        <Card id="cardInfoSlider" href='/' >
-            <h1 style={{position: "absolute", zIndex:100, bottom: "20px",left:"10px"}}>title</h1>
-            <p style={{position: "absolute", zIndex:100, bottom: 0,left:"10px"}}>description</p>
-          <Item wrapped id="slideItem" ui={false} /> 
+        <Card id="cardInfoSlider" href={'/project/' + project._id} >
+            <h1 style={{position: "absolute", zIndex:100, bottom: "20px",left:"10px"}}>{project.title}</h1>
+            <p style={{position: "absolute", zIndex:100, bottom: 0,left:"10px"}}>{project.description.slice(0,22) + "..."}</p>
+          <Item wrapped id="slideItem" ui={false} style={{backgroundImage: "url(" + project.media + ")"}}/> 
         </Card>
       </div>
     ));

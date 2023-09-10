@@ -49,7 +49,7 @@ export default function Home() {
                 </h1>
               </div>
               <div id="sliderContainerHome">
-                <SliderWithCards />
+                <SliderWithCards projects={projects}/>
               </div>
             </section>
       

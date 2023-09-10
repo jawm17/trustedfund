@@ -95,7 +95,7 @@
 #slideItem{
     height: 200px;
     width: 300px;
-    background-image: url(https://www.fundamental.bg/img/artboard.avif);
+    /* background-image: url(https://www.fundamental.bg/img/artboard.avif); */
     background-size: cover;
 }
 #cardInfoSlider h1, #cardInfoSlider p{
