@@ -157,8 +157,12 @@ projectRouter.post('/update-project', async (req, res) => {
 });
 
 projectRouter.get('/all-projects', async (req, res) => {
-    Project.findAll({ }, async (err, projects) => {
-        res.status(201).json({ projects });
+    Project.find()
+    .then(projects => {
+      res.status(200).json({ projects }); // top 10 users by solEarned value in descending order
+    })
+    .catch(err => {
+      res.status(500).json({ error: "no videos found" });
     });
 });
 

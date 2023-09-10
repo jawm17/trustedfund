@@ -20,22 +20,6 @@ import SliderWithCards from "./Slider";
 export default function Home() {
   const [visible, setVisible] = useState(false);
 
-  const { open, close } = useWeb3Modal()
-  const { address, isConnecting, isDisconnected } = useAccount()
-
-    // useEffect(() => {
-    //   getProjects();
-    // }, []);
-
-    async function getProjects() {
-      try {
-        const data = await axios.get("/project/all-projects");
-        console.log(data);
-      } catch (error) {
-        
-      }
-    }
-
   return (
     <>
       <nav id="nav" >
