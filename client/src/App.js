@@ -9,6 +9,7 @@ import NoMatchPage from "./pages/NoMatchPage";
 import Home from "./pages/Home/Home";
 import Account from "./pages/Account/Account";
 import Create from './pages/Create/Create';
+import ProjectPage from './pages/ProjectPage/ProjectPage';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/create" component={Create} />
+        <Route exact path="/project/:projectId" component={ProjectPage} />
         <PrivateRoute path="/account" component={Account} />
         <Route path="/" component={NoMatchPage} />
       </Switch>
