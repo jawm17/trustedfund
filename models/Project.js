@@ -27,7 +27,10 @@ const ProjectSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    contractAddress: {
+    alloPoolId: {
+        type: String,
+    },
+    alloProfileId: {
         type: String,
     },
     createdAt: {
