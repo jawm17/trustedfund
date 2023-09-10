@@ -131,7 +131,7 @@ projectRouter.post('/new-project', async (req, res) => {
 projectRouter.post('/get-project', async (req, res) => {
     const { projectId } = req.body;
     // check if user already exists
-    Project.findById({_id: projectId }, async (err, project) => {
+    Project.findById({ _id: projectId }, async (err, project) => {
         if (err) res.status(500).json({ message });
         else if (project) {
             res.status(200).json({ project });
@@ -146,13 +146,19 @@ projectRouter.post('/update-project', async (req, res) => {
     console.log(req.body)
     // check if user already exists
     Project.findOneAndUpdate({ _id: projectId }, { $push: { contributers: contributer }, "$inc": { "balance": amount } }).exec((err, document) => {
-        if (err){
+        if (err) {
             console.log(err);
             res.status(500).json({ message });
-        } 
-         else {
+        }
+        else {
             res.status(201).json({ document });
         }
+    });
+});
+
+projectRouter.get('/all-projects', async (req, res) => {
+    Project.findAll({ }, async (err, projects) => {
+        res.status(201).json({ projects });
     });
 });
 

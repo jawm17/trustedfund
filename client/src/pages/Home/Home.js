@@ -9,7 +9,7 @@ import {
   Segment,
   Sidebar, Card, Button
 } from 'semantic-ui-react'
-
+import axios from "axios";
 import "./homeStyle.css";
 
 // comps
@@ -23,6 +23,18 @@ export default function Home() {
   const { open, close } = useWeb3Modal()
   const { address, isConnecting, isDisconnected } = useAccount()
 
+    // useEffect(() => {
+    //   getProjects();
+    // }, []);
+
+    async function getProjects() {
+      try {
+        const data = await axios.get("/project/all-projects");
+        console.log(data);
+      } catch (error) {
+        
+      }
+    }
 
   return (
     <>
