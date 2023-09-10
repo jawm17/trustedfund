@@ -141,4 +141,19 @@ projectRouter.post('/get-project', async (req, res) => {
     });
 });
 
+projectRouter.post('/update-project', async (req, res) => {
+    const { projectId, contributer, amount } = req.body;
+    console.log(req.body)
+    // check if user already exists
+    Project.findOneAndUpdate({ _id: projectId }, { $push: { contributers: contributer }, "$inc": { "balance": amount } }).exec((err, document) => {
+        if (err){
+            console.log(err);
+            res.status(500).json({ message });
+        } 
+         else {
+            res.status(201).json({ document });
+        }
+    });
+});
+
 module.exports = projectRouter;

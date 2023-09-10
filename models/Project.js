@@ -34,6 +34,14 @@ const ProjectSchema = new mongoose.Schema({
     alloProfileId: {
         type: String,
     },
+    contributers: {
+        type: Array,
+        default: []
+    },
+    balance: {
+        type: Number,
+        default: 0
+    },
     createdAt: {
         type: Date,
         default: Date.now

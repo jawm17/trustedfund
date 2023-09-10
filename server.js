@@ -6,7 +6,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const cookieParser = require("cookie-parser");
 
-const db = "mongodb://localhost:27017/funraise";
+const db = "mongodb+srv://koikoi5:koikoi5@cluster0.lnkmi3d.mongodb.net/?retryWrites=true&w=majority";
 const db_dev = "mongodb://localhost:27017/funraise";
 
 // Define middleware here
